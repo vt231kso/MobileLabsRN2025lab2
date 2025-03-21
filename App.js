@@ -7,6 +7,7 @@ import Store from "./screens/store";
 import Community from "./screens/community";
 import Chat from "./screens/chat";
 import Safety from "./screens/safety";
+import Profile from "./screens/profile";
 
 const Tab = createBottomTabNavigator();
 
@@ -54,7 +55,7 @@ export default function App() {
           <Tab.Screen name="Community" component={Community} options={{ headerShown: false }}/>
           <Tab.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
           <Tab.Screen name="Safety" component={Safety} options={{ headerShown: false }}/>
-          {/*<Tab.Screen name="Profile" component={Store} />*/}
+          <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
         </Tab.Navigator>
       </NavigationContainer>
 
