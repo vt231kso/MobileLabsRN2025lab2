@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import Header from "../components/header";
+import Tabs from "../components/tabs";
 
 export default function Chat() {
   const [activeTab, setActiveTab] = useState("chats");
-
+  const tabs = [
+    { id: "chats", label: "Open chats" },
+    { id: "friends", label: "My friends" },
+  ];
   // Масив даних чатів з різними point іконками
   const chats = [
     { id: 1, userName: "Mark Dyson", message: "I'm already starting to play • 14 Jun", avatar: require("../assets/Group 7.png"), pointIcon: require("../assets/point.png") },
@@ -23,24 +27,7 @@ export default function Chat() {
     <View style={styles.container}>
       <View style={styles.content}>
         <Header title="Chat" />
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === "chats" && styles.activeTab]}
-            onPress={() => setActiveTab("chats")}
-          >
-            <Text style={[styles.text, activeTab === "chats" && styles.activeText]}>
-              Open chats
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === "friends" && styles.inactiveTab]}
-            onPress={() => setActiveTab("friends")}
-          >
-            <Text style={[styles.text, activeTab === "friends" && styles.inactiveText]}>
-              My friends
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
 
         <ScrollView style={styles.blocks}>
           {chats.map(chat => (

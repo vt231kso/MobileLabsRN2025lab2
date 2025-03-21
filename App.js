@@ -6,6 +6,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Store from "./screens/store";
 import Community from "./screens/community";
 import Chat from "./screens/chat";
+import Safety from "./screens/safety";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,7 +35,7 @@ export default function App() {
               let iconName;
               if (route.name === "Store") iconName = "shopping-bag";
               else if (route.name === "Community") iconName = "account-circle";
-              else if (route.name === "Help") iconName = "about";
+              else if (route.name === "Safety") iconName = "security";
               else if (route.name === "Chat") iconName = "chat";
               else if (route.name === "Profile") iconName = "person";
 
@@ -52,7 +53,7 @@ export default function App() {
 
           <Tab.Screen name="Community" component={Community} options={{ headerShown: false }}/>
           <Tab.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
-          {/*<Tab.Screen name="Help" component={Store} />*/}
+          <Tab.Screen name="Safety" component={Safety} options={{ headerShown: false }}/>
           {/*<Tab.Screen name="Profile" component={Store} />*/}
         </Tab.Navigator>
       </NavigationContainer>
