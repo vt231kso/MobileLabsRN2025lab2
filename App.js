@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Store from "./screens/store";
 import Community from "./screens/community";
+import Chat from "./screens/chat";
 
 const Tab = createBottomTabNavigator();
 
@@ -50,7 +51,7 @@ export default function App() {
           />
 
           <Tab.Screen name="Community" component={Community} options={{ headerShown: false }}/>
-          {/*<Tab.Screen name="Chat" component={Store} />*/}
+          <Tab.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
           {/*<Tab.Screen name="Help" component={Store} />*/}
           {/*<Tab.Screen name="Profile" component={Store} />*/}
         </Tab.Navigator>
