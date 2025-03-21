@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {View, Text, Image, TouchableOpacity, StyleSheet} from "react-native";
 
 export default function Store() {
   const buttons = ["Top Sellers", "Free to play", "Early access"];
@@ -29,19 +29,19 @@ export default function Store() {
       <View style={styles.content}>
         <View style={styles.navigationContainer}>
           <View style={styles.header}>
-            <Image source={require("../assets/favicon.png")} style={styles.image} />
+            <Image source={require("../assets/favicon.png")} style={styles.image}/>
             <Text style={styles.title}>Store</Text>
           </View>
-          <Image source={require("../assets/search (2).png")} style={{ width: 16, height: 16 }} />
+          <Image source={require("../assets/search (2).png")} style={{width: 16, height: 16}}/>
         </View>
 
         <View style={styles.imageContainer}>
           <View style={{flexDirection: "row", justifyContent: "space-around"}}>
-            <Image source={require("../assets/Bitmap (1).png")} style={styles.picture} />
-            <Image source={require("../assets/Bitmap (1).png")} style={styles.picture} />
+            <Image source={require("../assets/Bitmap (1).png")} style={styles.picture}/>
+            <Image source={require("../assets/Bitmap (1).png")} style={styles.picture}/>
           </View>
 
-          <Image source={require("../assets/Group 5.png")} style={{ top: -100, left: 20 }} />
+          <Image source={require("../assets/Group 5.png")} style={{top: -100, left: 20}}/>
         </View>
 
         <View style={styles.buttonsContainer}>
@@ -53,15 +53,15 @@ export default function Store() {
         </View>
 
         <View style={styles.block}>
-          <Image source={require("../assets/Bitmap (1)n.png")} style={styles.blockPicture} />
-          <View style={{ paddingLeft: 10, alignItems: "flex-start" }}>
+          <Image source={require("../assets/Bitmap (1)n.png")} style={styles.blockPicture}/>
+          <View style={{paddingLeft: 10, alignItems: "flex-start"}}>
             <Text style={styles.text}>Grand Theft Auto V</Text>
             <View style={styles.platformContainer}>
-              <Image source={require("../assets/free-icon-windows-220215.png")} style={styles.blockIcon} />
+              <Image source={require("../assets/free-icon-windows-220215.png")} style={styles.blockIcon}/>
               <Text style={styles.blockText}>Windows</Text>
             </View>
           </View>
-          <View style={styles.price}>
+          <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center",marginLeft:80}}>
             <View style={styles.priceRow}>
               <Text style={styles.priceOld}>$20</Text>
               <Text style={styles.priceText}>$10</Text>
@@ -74,11 +74,11 @@ export default function Store() {
 
         {products.map((product, index) => (
           <View key={index} style={styles.block}>
-            <Image source={product.image} style={styles.blockPicture} />
-            <View style={{ paddingLeft: 10, alignItems: "flex-start" }}>
+            <Image source={product.image} style={styles.blockPicture}/>
+            <View style={{paddingLeft: 10, alignItems: "flex-start"}}>
               <Text style={styles.text}>{product.title}</Text>
               <View style={styles.platformContainer}>
-                <Image source={require("../assets/free-icon-windows-220215.png")} style={styles.blockIcon} />
+                <Image source={require("../assets/free-icon-windows-220215.png")} style={styles.blockIcon}/>
                 <Text style={styles.blockText}>{product.platform}</Text>
               </View>
             </View>
@@ -98,9 +98,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
+    marginTop:20,
     marginLeft: 20,
     flex: 1,
-    marginRight:10
+    marginRight: 10
   },
   navigationContainer: {
     flexDirection: "row",
@@ -127,11 +128,11 @@ const styles = StyleSheet.create({
     height: 230,
     resizeMode: "contain",
   },
-   imageContainer: {
-  height: 250,
+  imageContainer: {
+    height: 250,
     marginTop: 10,
-   },
-   buttonsContainer: {
+  },
+  buttonsContainer: {
     flexDirection: "row",
     gap: 10,
     justifyContent: "flex-start",
