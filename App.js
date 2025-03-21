@@ -4,6 +4,8 @@ import {NavigationContainer} from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Store from "./screens/store";
+import Community from "./screens/community";
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -25,12 +27,12 @@ export default function App() {
             tabBarShowLabel: false,
             tabBarStyle: { backgroundColor: "#12141C", height: 70 },
             tabBarIndicatorStyle: { backgroundColor: "#12141C", height: 2 },
-            tabBarActiveTintColor: "white",
-            tabBarInactiveTintColor: "gray",
+            tabBarActiveTintColor: "#12141C",
+            tabBarInactiveTintColor: "#12141C",
             tabBarIcon: ({ focused }) => {
               let iconName;
               if (route.name === "Store") iconName = "shopping-bag";
-              else if (route.name === "Main") iconName = "home";
+              else if (route.name === "Community") iconName = "account-circle";
               else if (route.name === "Help") iconName = "about";
               else if (route.name === "Chat") iconName = "chat";
               else if (route.name === "Profile") iconName = "person";
@@ -47,7 +49,7 @@ export default function App() {
             options={{ headerShown: false }}
           />
 
-          {/*<Tab.Screen name="Main" component={Store} />*/}
+          <Tab.Screen name="Community" component={Community} options={{ headerShown: false }}/>
           {/*<Tab.Screen name="Chat" component={Store} />*/}
           {/*<Tab.Screen name="Help" component={Store} />*/}
           {/*<Tab.Screen name="Profile" component={Store} />*/}

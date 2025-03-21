@@ -1,6 +1,6 @@
 import React from "react";
 import {View, Text, Image, TouchableOpacity, StyleSheet} from "react-native";
-
+import Header from "../components/header";
 export default function Store() {
   const buttons = ["Top Sellers", "Free to play", "Early access"];
   const products = [
@@ -27,16 +27,17 @@ export default function Store() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <View style={styles.navigationContainer}>
-          <View style={styles.header}>
-            <Image source={require("../assets/favicon.png")} style={styles.image}/>
-            <Text style={styles.title}>Store</Text>
-          </View>
-          <Image source={require("../assets/search (2).png")} style={{width: 16, height: 16}}/>
-        </View>
+        {/*<View style={styles.navigationContainer}>*/}
+        {/*  <View style={styles.header}>*/}
+        {/*    <Image source={require("../assets/favicon.png")} style={styles.image}/>*/}
+        {/*    <Text style={styles.title}>Store</Text>*/}
+        {/*  </View>*/}
+        {/*  <Image source={require("../assets/search (2).png")} style={{width: 16, height: 16}}/>*/}
+        {/*</View>*/}
+        <Header title="Store" />
 
         <View style={styles.imageContainer}>
-          <View style={{flexDirection: "row", justifyContent: "space-around"}}>
+          <View style={{flexDirection: "row", gap:10}}>
             <Image source={require("../assets/Bitmap (1).png")} style={styles.picture}/>
             <Image source={require("../assets/Bitmap (1).png")} style={styles.picture}/>
           </View>
@@ -103,29 +104,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10
   },
-  navigationContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 10,
-    alignItems: "center",
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  image: {
-    width: 30,
-    height: 30,
-    marginRight: 10,
-  },
-  title: {
-    fontSize: 28,
-    color: "white",
-  },
+
   picture: {
     borderRadius: 20,
     width: 340,
-    height: 230,
+    height: 250,
     resizeMode: "contain",
   },
   imageContainer: {
@@ -133,17 +116,18 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonsContainer: {
+
     flexDirection: "row",
     gap: 10,
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 0,
+    marginTop: 10,
   },
 
 
   button: {
     width: 103,
-    height: 38,
+    height: 42,
     backgroundColor: "#303649",
     borderRadius: 5,
     justifyContent: "center",
