@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View,Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -45,7 +45,18 @@ function AppContent() {
               else if (route.name === "Community") iconName = "account-circle";
               else if (route.name === "Safety") iconName = "security";
               else if (route.name === "Chat") iconName = "chat";
-              else if (route.name === "Profile") iconName = "person";
+              else if (route.name === "Profile") {
+                return (
+                  <Image
+                    source={require("./assets/Group 4.png")} // Шлях до вашого зображення
+                    style={{
+                      width: 24,
+                      height: 24,
+                      
+                    }}
+                  />
+                );
+              }
 
               return (
                 <Icon name={iconName} size={24} color={focused ? (isDark ? "white" : "black") : "gray"} />
