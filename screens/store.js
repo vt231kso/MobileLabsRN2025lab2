@@ -1,93 +1,101 @@
 import React from "react";
-import {View, Text, Image, TouchableOpacity, StyleSheet} from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, Switch } from "react-native";
 import Header from "../components/header";
+import { useTheme } from "../components/ThemeContext"; // Імпортуємо контекст теми
+
 export default function Store() {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+
   const buttons = ["Top Sellers", "Free to play", "Early access"];
   const products = [
     {
+      id: "1",
       image: require("../assets/Bitmap (2).png"),
       title: "Battlefield 4",
       platform: "Windows",
       newPrice: "$35",
     },
     {
+      id: "2",
       image: require("../assets/Bitmap (3).png"),
       title: "Factorio",
       platform: "Windows, Mac",
       newPrice: "$7",
     },
     {
+      id: "3",
       image: require("../assets/Group 10.png"),
       title: "Horizon Zero Dawn",
       platform: "Windows",
       newPrice: "$38",
-    }
+    },
+    {
+      id: "4",
+      image: require("../assets/Group 10.png"),
+      title: "Horizon Zero Dawn",
+      platform: "Windows",
+      newPrice: "$39",
+    },
+    {
+      id: "5",
+      image: require("../assets/Group 10.png"),
+      title: "Horizon Zero Dawn",
+      platform: "Windows",
+      newPrice: "$40",
+    },
   ];
 
+  const renderProduct = ({ item }) => (
+    <View style={styles.block}>
+      <Image source={item.image} style={styles.blockPicture} />
+      <View style={{ paddingLeft: 10, alignItems: "flex-start" }}>
+        <Text style={[styles.text, { color: isDark ? "white" : "black" }]}>{item.title}</Text>
+        <View style={styles.platformContainer}>
+          <Image source={require("../assets/free-icon-windows-220215.png")} style={styles.blockIcon} />
+          <Text style={[styles.blockText, { color: isDark ? "#7B8D9D" : "#303649" }]}>{item.platform}</Text>
+        </View>
+      </View>
+      <View style={styles.price}>
+        <Text style={[styles.priceText, { color: isDark ? "white" : "black" }]}>{item.newPrice}</Text>
+      </View>
+    </View>
+  );
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: isDark ? "#1c202c" : "#F5F5F5" }]}>
       <View style={styles.content}>
-        {/*<View style={styles.navigationContainer}>*/}
-        {/*  <View style={styles.header}>*/}
-        {/*    <Image source={require("../assets/favicon.png")} style={styles.image}/>*/}
-        {/*    <Text style={styles.title}>Store</Text>*/}
-        {/*  </View>*/}
-        {/*  <Image source={require("../assets/search (2).png")} style={{width: 16, height: 16}}/>*/}
-        {/*</View>*/}
         <Header title="Store" />
 
-        <View style={styles.imageContainer}>
-          <View style={{flexDirection: "row", gap:10}}>
-            <Image source={require("../assets/Bitmap (1).png")} style={styles.picture}/>
-            <Image source={require("../assets/Bitmap (1).png")} style={styles.picture}/>
-          </View>
+        {/* Перемикач теми */}
+        <View style={styles.switchContainer}>
+          <Text style={[styles.label, { color: isDark ? "white" : "black" }]}>Dark Mode</Text>
+          <Switch
+            value={isDark}
+            onValueChange={toggleTheme}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={isDark ? "#f4f3f4" : "#f4f3f4"}
+          />
+        </View>
 
-          <Image source={require("../assets/Group 5.png")} style={{top: -100, left: 20}}/>
+        <View style={styles.imageContainer}>
+          <View style={{ flexDirection: "row", gap: 10 }}>
+            <Image source={require("../assets/Bitmap (1).png")} style={styles.picture} />
+            <Image source={require("../assets/Bitmap (1).png")} style={styles.picture} />
+          </View>
+          <Image source={require("../assets/Group 5.png")} style={{ top: -100, left: 20 }} />
         </View>
 
         <View style={styles.buttonsContainer}>
           {buttons.map((text, index) => (
-            <TouchableOpacity key={index} style={styles.button}>
-              <Text style={styles.buttonText}>{text}</Text>
+            <TouchableOpacity key={index} style={[styles.button, { backgroundColor: isDark ? "#303649" : "#D1D1D1" }]}>
+              <Text style={[styles.buttonText, { color: isDark ? "white" : "black" }]}>{text}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        <View style={styles.block}>
-          <Image source={require("../assets/Bitmap (1)n.png")} style={styles.blockPicture}/>
-          <View style={{paddingLeft: 10, alignItems: "flex-start"}}>
-            <Text style={styles.text}>Grand Theft Auto V</Text>
-            <View style={styles.platformContainer}>
-              <Image source={require("../assets/free-icon-windows-220215.png")} style={styles.blockIcon}/>
-              <Text style={styles.blockText}>Windows</Text>
-            </View>
-          </View>
-          <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center",marginLeft:80}}>
-            <View style={styles.priceRow}>
-              <Text style={styles.priceOld}>$20</Text>
-              <Text style={styles.priceText}>$10</Text>
-            </View>
-            <View style={styles.sale}>
-              <Text style={styles.saleText}>-50%</Text>
-            </View>
-          </View>
-        </View>
-
-        {products.map((product, index) => (
-          <View key={index} style={styles.block}>
-            <Image source={product.image} style={styles.blockPicture}/>
-            <View style={{paddingLeft: 10, alignItems: "flex-start"}}>
-              <Text style={styles.text}>{product.title}</Text>
-              <View style={styles.platformContainer}>
-                <Image source={require("../assets/free-icon-windows-220215.png")} style={styles.blockIcon}/>
-                <Text style={styles.blockText}>{product.platform}</Text>
-              </View>
-            </View>
-            <View style={styles.price}>
-              <Text style={styles.priceText}>{product.newPrice}</Text>
-            </View>
-          </View>
-        ))}
+        {/* FlatList для продуктів */}
+        <FlatList data={products} keyExtractor={(item) => item.id} renderItem={renderProduct} />
       </View>
     </View>
   );
@@ -95,16 +103,24 @@ export default function Store() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1c202c",
     flex: 1,
   },
   content: {
-    marginTop:20,
+    marginTop: 20,
     marginLeft: 20,
     flex: 1,
-    marginRight: 10
+    marginRight: 10,
   },
-
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+    justifyContent: "space-between",
+  },
+  label: {
+    fontSize: 16,
+    marginRight: 10,
+  },
   picture: {
     borderRadius: 20,
     width: 340,
@@ -116,26 +132,21 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonsContainer: {
-
     flexDirection: "row",
     gap: 10,
     justifyContent: "flex-start",
     alignItems: "center",
     marginTop: 10,
   },
-
-
   button: {
     width: 103,
     height: 42,
-    backgroundColor: "#303649",
     borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
   },
   buttonText: {
     textAlign: "center",
-    color: "white",
     fontSize: 14,
   },
   block: {
@@ -153,11 +164,9 @@ const styles = StyleSheet.create({
     height: 12.5,
   },
   blockText: {
-    color: "#7B8D9D",
     fontSize: 14,
   },
   text: {
-    color: "white",
     fontSize: 16,
   },
   price: {
@@ -165,29 +174,11 @@ const styles = StyleSheet.create({
   },
   priceText: {
     fontSize: 18,
-    color: "white",
-  },
-  priceOld: {
-    fontSize: 12,
-    color: "#ffffff",
-    textDecorationLine: "line-through",
-  },
-  sale: {
-    marginTop: 5,
-    padding: 3,
-    borderRadius: 5,
-    backgroundColor: "#00D44B80",
-  },
-  saleText: {
-    color: "white",
-  },
-  priceRow: {
-    flexDirection: 'row',
-    gap: 5,
   },
   platformContainer: {
     flexDirection: "row",
     alignItems: "center",
     gap: 5,
-  }
+  },
 });
+
