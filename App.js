@@ -1,37 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,Image } from 'react-native';
-import {NavigationContainer} from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Store from "./screens/store";
 import Community from "./screens/community";
 import Chat from "./screens/chat";
 import Safety from "./screens/safety";
 import Profile from "./screens/profile";
-
+import { ThemeProvider, useTheme } from "./components/ThemeContext"; // Додаємо тему
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      {/* Верхній заголовок */}
-<View style={{marginTop:20,flex:1}}>
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
 
-      {/* Навігація */}
+function AppContent() {
+  const { theme } = useTheme(); // Отримуємо тему
+  const isDark = theme === "dark";
+
+  return (
+    <View style={[styles.container, { backgroundColor: isDark ? "#1C202C" : "#F5F5F5" }]}>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarLabelStyle: {
               fontSize: 14,
               fontWeight: "bold",
-              color: "black",
+              color: isDark ? "white" : "black",
               marginBottom: 15,
             },
             tabBarShowLabel: false,
-            tabBarStyle: { backgroundColor: "#12141C", height: 70 },
-            tabBarIndicatorStyle: { backgroundColor: "#12141C", height: 2 },
-            tabBarActiveTintColor: "#12141C",
-            tabBarInactiveTintColor: "#12141C",
+            tabBarStyle: {
+              backgroundColor: isDark ? "#12141C" : "#FFFFFF",
+              height: 70,
+            },
             tabBarIcon: ({ focused }) => {
               let iconName;
               if (route.name === "Store") iconName = "shopping-bag";
@@ -41,25 +48,18 @@ export default function App() {
               else if (route.name === "Profile") iconName = "person";
 
               return (
-                <Icon name={iconName} size={24} color={focused ? "white" : "gray"} />
+                <Icon name={iconName} size={24} color={focused ? (isDark ? "white" : "black") : "gray"} />
               );
             },
           })}
         >
-          <Tab.Screen
-            name="Store"
-            component={Store}
-            options={{ headerShown: false }}
-          />
-
-          <Tab.Screen name="Community" component={Community} options={{ headerShown: false }}/>
+          <Tab.Screen name="Store" component={Store} options={{ headerShown: false }} />
+          <Tab.Screen name="Community" component={Community} options={{ headerShown: false }} />
           <Tab.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
-          <Tab.Screen name="Safety" component={Safety} options={{ headerShown: false }}/>
+          <Tab.Screen name="Safety" component={Safety} options={{ headerShown: false }} />
           <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
         </Tab.Navigator>
       </NavigationContainer>
-
-</View>
     </View>
   );
 }
@@ -67,8 +67,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1c202c',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });
